@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+
+    <typeAlias alias="User" type="com.mongo.ibatis.User"/>
+
+    <select id="selectById" resultClass="com.mongo.ibatis.User">
+        SELECT * FROM user WHERE id in($ids$)
+    </select>
+    <select id="" parameterClass="" resultClass="User">
+        SELECT * FROM  user WHERE id IN<iterate property="ids" open="(" conjunction="," close=")" >id=#ids[]#</iterate>
+    </select>
+
+</sqlMap>
+

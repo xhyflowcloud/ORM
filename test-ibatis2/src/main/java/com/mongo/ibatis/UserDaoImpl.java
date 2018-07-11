@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class UserDaoImpl implements UserDao {
     private static SqlMapClient sqlMapClient = null;
@@ -31,6 +32,26 @@ public class UserDaoImpl implements UserDao {
         List<User> users = null;
         try {
             users = sqlMapClient.queryForList("selectById", id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public List<User> getUserByIds(Map<String, Object> query) {
+        List<User> users = null;
+        try {
+            users = sqlMapClient.queryForList("selectByIds", query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public List<User> getUserByIds(List<Integer> ids) {
+        List<User> users = null;
+        try {
+            users = sqlMapClient.queryForList("selectByIds", ids);
         } catch (SQLException e) {
             e.printStackTrace();
         }

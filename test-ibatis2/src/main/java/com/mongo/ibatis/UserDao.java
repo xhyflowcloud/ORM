@@ -7,4 +7,5 @@ public interface UserDao {
     List<User> getUserById(Integer id);
     List<User> getUserByIds(Map<String, Object> query);
     List<User> getUserByIds(List<Integer> ids);
+    List<User> test();
 }

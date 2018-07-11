@@ -8,8 +8,22 @@
     <select id="selectById" resultClass="com.mongo.ibatis.User">
         SELECT * FROM user WHERE id in($ids$)
     </select>
-    <select id="selectByIds"  resultClass="User">
+    <select id="selectByIds" parameterClass="java.util.List" resultClass="User">
         SELECT * FROM  user WHERE id IN<iterate property="ids" open="(" conjunction="," close=")" >id=#ids[]#</iterate>
+    </select>
+
+    <select id="selectByArray" resultClass="User">
+        SELECT * FROM  user WHERE id IN<iterate open="(" conjunction="," close=")" >
+        <![CDATA[
+          #[]#
+        ]]>
+    </iterate>
+    </select>
+
+    <select id="selectByList" parameterClass="java.util.List" resultClass="User">
+        SELECT * FROM  user WHERE id IN <iterate open="(" close=")" conjunction=",">
+        #ids[]#
+    </iterate>
     </select>
 
 </sqlMap>

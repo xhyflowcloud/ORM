@@ -7,6 +7,7 @@ import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,19 @@ public class UserDaoImpl implements UserDao {
         List<User> users = null;
         try {
             users = sqlMapClient.queryForList("selectByIds", ids);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public List<User> test(){
+        List<User> users = null;
+        try {
+            //int[] ids = {1};
+            List<Integer> ids = new ArrayList<Integer>();
+            ids.add(1);
+            users = sqlMapClient.queryForList("selectByList", ids);
         } catch (SQLException e) {
             e.printStackTrace();
         }
